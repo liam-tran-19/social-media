@@ -10,7 +10,7 @@ import {
   NavLink,
 } from "reactstrap";
 
-const Dashboard = () => {
+const AppNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleToggle = () => setIsOpen(!isOpen);
   const [name, setName] = useState("");
@@ -47,4 +47,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default AppNav;

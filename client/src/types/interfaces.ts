@@ -25,14 +25,6 @@ export interface IAuthForm {
   clearErrors(): void;
 }
 
-export interface ILoginModal extends IAuthForm {
-  login(user: IUser): void;
-}
-
-export interface IRegisterModal extends IAuthForm {
-  register(user: IUser): void;
-}
-
 export interface ILogoutProps {
   logout(): void;
 }
@@ -61,37 +53,6 @@ export interface IAppNavbar {
   };
 }
 
-// ITEMS
-export interface IExistingItem {
-  _id: string;
-  name: string;
-}
-
-export interface IItem {
-  _id?: string;
-  name: string;
-}
-
-export interface IItemModal {
-  isAuthenticated: boolean;
-  addItem(item: IItem): void;
-}
-
-export interface IItemReduxProps extends IAuthReduxProps {
-  item: {
-    items: IExistingItem[];
-  };
-}
-
-export interface IShoppingList {
-  item: {
-    items: IExistingItem[];
-  };
-  getItems(): void;
-  deleteItem(id: string): void;
-  isAuthenticated: boolean;
-}
-
 export interface IAuthFunction {
   username?: string;
   email: string;
@@ -114,3 +75,9 @@ export interface IAction {
 export type ProtectedRouteProps = {
   component: any;
 } & RouteProps;
+
+export interface IChat {
+  idTexter: string;
+  idUser: string;
+  searchName: string
+}

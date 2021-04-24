@@ -41,7 +41,7 @@ export default function(state:NotesReducers = initialState, action: any) {
     case REGISTER_SUCCESS:
       console.log(action.payload)
       localStorage.setItem('token', action.payload.token);
-      localStorage.setItem('user', action.payload.user.username);
+      localStorage.setItem('user', action.payload.user);
       return {
         ...state,
         ...action.payload,
