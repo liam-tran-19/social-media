@@ -9,14 +9,21 @@ import {
   REGISTER_FAIL
 } from '../actions/types';
 
-const initialState = {
+interface NotesReducers {
+  token: any,
+  isAuthenticated: boolean,
+  isLoading: boolean,
+  user: any,
+}
+
+const initialState:NotesReducers = {
   token: localStorage.getItem('token'),
-  isAuthenticated: null,
+  isAuthenticated: false,
   isLoading: false,
-  user: null
+  user: localStorage.getItem('user')
 };
 
-export default function(state = initialState, action: any) {
+export default function(state:NotesReducers = initialState, action: any) {
   switch (action.type) {
     case USER_LOADING:
       return {
@@ -32,7 +39,9 @@ export default function(state = initialState, action: any) {
       };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
+      console.log(action.payload)
       localStorage.setItem('token', action.payload.token);
+      localStorage.setItem('user', action.payload.user.username);
       return {
         ...state,
         ...action.payload,
@@ -44,6 +53,7 @@ export default function(state = initialState, action: any) {
     case LOGOUT_SUCCESS:
     case REGISTER_FAIL:
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       return {
         ...state,
         token: null,

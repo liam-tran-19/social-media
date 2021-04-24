@@ -1,22 +1,33 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { ProtectedRouteProps } from "../types/interfaces";
+import { IAuthReduxProps, ProtectedRouteProps } from "../types/interfaces";
+import { useSelector } from "react-redux";
+import { RootStore } from "../redux/store";
 
-export default function PrivateRoute({
+const PrivateRoute = ({
   component: Component,
-  auth,
-  ...rest
-}: ProtectedRouteProps) {
+  ...routeProps
+}: ProtectedRouteProps) => {
+  const state = useSelector((state: RootStore) => state.auth);
+  console.log(state);
+
   return (
     <Route
-      {...rest}
-      render={(props) => {
-        return auth && auth.isAuthenticated ? (
+      {...routeProps}
+      render={props =>
+        state.isAuthenticated ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/" />
-        );
-      }}
-    ></Route>
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: props.location },
+            }}
+          />
+        )
+      }
+    />
   );
-}
+};
+
+export default PrivateRoute;

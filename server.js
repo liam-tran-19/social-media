@@ -1,5 +1,5 @@
-const app = require("./app");
-const config = require("./config/index");
+const app = require("./backend/app");
+const config = require("./backend/config/index");
 
 const { PORT } = config;
 

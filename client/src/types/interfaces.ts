@@ -15,7 +15,6 @@ export interface IMsg {
 }
 
 export interface IUser {
-  name?: string;
   email: string;
   password: string;
 }
@@ -94,7 +93,7 @@ export interface IShoppingList {
 }
 
 export interface IAuthFunction {
-  name?: string;
+  username?: string;
   email: string;
   password: string;
 }
@@ -114,4 +113,4 @@ export interface IAction {
 
 export type ProtectedRouteProps = {
   component: any;
-} & RouteProps & IAppNavbar;
+} & RouteProps;

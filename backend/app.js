@@ -8,6 +8,7 @@ const config = require('./config');
 
 // routes
 const authRoutes = require('./routes/api/auth');
+const itemRoutes = require('./routes/api/items');
 const userRoutes = require('./routes/api/users');
 
 const { MONGO_DB_NAME } = config;
@@ -32,6 +33,7 @@ mongoose
   .catch((err) => console.log(err));
 
 // Use Routes
+app.use('/api/items', itemRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 

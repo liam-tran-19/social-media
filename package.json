@@ -8,7 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/son-tran-97/social-media.git"
+    "url": "git+https://github.com/son-tran-97/social-media.git",
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
