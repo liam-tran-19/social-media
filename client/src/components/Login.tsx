@@ -62,7 +62,7 @@ const Login = () => {
                   onChange={handleChangePassword}
                 />
               </Form.Group>
-              <Button className="w-100" type="submit">
+              <Button variant="secondary" className="w-100" type="submit">
                 Log In
               </Button>
             </Form>

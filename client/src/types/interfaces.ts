@@ -54,7 +54,13 @@ export interface IAppNavbar {
 }
 
 export interface IAuthFunction {
+  _id: number;
   username?: string;
+  email: string;
+  password: string;
+}
+
+export interface ILogin {
   email: string;
   password: string;
 }
@@ -77,7 +83,25 @@ export type ProtectedRouteProps = {
 } & RouteProps;
 
 export interface IChat {
-  idTexter: string;
-  idUser: string;
+  idTexter: number;
+  idFriend: number;
   searchName: string
+}
+
+export interface IUserObj {
+  _id: number;
+  username: string;
+  email: string;
+}
+
+export interface IMsg {
+  sender: number;
+  text: string;
+  createdAt: any;
+}
+
+export interface IChatMsg {
+  key: number;
+  message: any 
+  userId: number;
 }

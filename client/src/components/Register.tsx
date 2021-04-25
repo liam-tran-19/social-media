@@ -30,20 +30,28 @@ const Register = () => {
     }
   }, [state, err]);
 
-  function handleSubmit(e: any) {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
+    let _id: number;
 
     if (password !== confirmPassword) {
       return setError("Passwords do not match");
     } else {
-      const user = {
-        username,
-        email,
-        password,
-      };
-      dispatch(register(user));
+      await fetch("/api/auth/user/findAll")
+        .then((response) => response.json())
+        .then((data) => {
+          _id = data.length + 1;
+          console.log(_id);
+          const user = {
+            _id,
+            username,
+            email,
+            password,
+          };
+          dispatch(register(user));
+        });
     }
-  }
+  };
   return (
     <Container
       className="d-flex align-items-center justify-content-center"
@@ -87,7 +95,7 @@ const Register = () => {
                   onChange={(e: ITarget) => setConfirmPassword(e.target.value)}
                 />
               </Form.Group>
-              <Button className="w-100" type="submit">
+              <Button variant="secondary" className="w-100" type="submit">
                 Sign Up
               </Button>
             </Form>

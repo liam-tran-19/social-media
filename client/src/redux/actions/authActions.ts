@@ -10,7 +10,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL
 } from './types';
-import { IAuthFunction, IConfigHeaders } from '../../types/interfaces';
+import { ILogin, IConfigHeaders,IAuthFunction } from '../../types/interfaces';
 
 // Check token & load user
 export const loadUser = () => (dispatch: Function, getState: Function) => {
@@ -34,7 +34,7 @@ export const loadUser = () => (dispatch: Function, getState: Function) => {
 };
 
 // Register User
-export const register = ({ username, email, password }: IAuthFunction) => (
+export const register = ({ _id, username, email, password }: IAuthFunction) => (
   dispatch: Function
 ) => {
   // Headers
@@ -45,7 +45,7 @@ export const register = ({ username, email, password }: IAuthFunction) => (
   };
 
   // Request body
-  const body = JSON.stringify({ username, email, password });
+  const body = JSON.stringify({_id, username, email, password });
 
   axios
     .post('/api/auth/register', body, config)
@@ -66,7 +66,7 @@ export const register = ({ username, email, password }: IAuthFunction) => (
 };
 
 // Login User
-export const login = ({ email, password }: IAuthFunction) => (
+export const login = ({ email, password }: ILogin) => (
   
   dispatch: Function
 ) => {

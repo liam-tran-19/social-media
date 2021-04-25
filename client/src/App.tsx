@@ -6,7 +6,8 @@ import { loadUser } from "./redux/actions/authActions";
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./components/Login";
 import Register from "./components/Register";
-// import Chat from "./components/chat/Chat";
+import Chat from "./components/chat/Chat";
+import Conversation from "./components/chat/conversation/Conversation";
 
 function App() {
   React.useEffect(() => {
@@ -18,7 +19,8 @@ function App() {
         <div className="App">
           <Route path="/login" exact component={Login}></Route>
           <Route path="/signup" component={Register}></Route>
-          <PrivateRoute exact path="/" component={AppNav} />
+          <PrivateRoute exact path="/" component={Chat} />
+          <PrivateRoute exact path="/conversation" component={Conversation} />
         </div>
       </Switch>
     </Router>

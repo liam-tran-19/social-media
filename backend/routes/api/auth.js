@@ -39,6 +39,7 @@ router.post("/login", async (req, res) => {
       user: {
         id: user._id,
         email: user.email,
+        username: user.username
       },
     });
   } catch (e) {
@@ -53,7 +54,7 @@ router.post("/login", async (req, res) => {
  */
 
 router.post("/register", async (req, res) => {
-  const { username, email, password } = req.body;
+  const { _id, username, email, password } = req.body;
 
   // Simple validation
   if (!username || !email || !password) {
@@ -71,6 +72,7 @@ router.post("/register", async (req, res) => {
     if (!hash) throw Error("Something went wrong hashing the password");
 
     const newUser = new User({
+      _id,
       username,
       email,
       password: hash,
@@ -95,10 +97,18 @@ router.post("/register", async (req, res) => {
     res.status(400).json({ error: e.message });
   }
 });
-
-router.get("/user", auth, async (req, res) => {
+router.get("/user/id/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await User.findById(req.params.id).select("-password");
+    if (!user) throw Error("User does not exist");
+    res.json(user);
+  } catch (e) {
+    res.status(400).json({ msg: e.message });
+  }
+});
+router.get("/user/findAll", async (req, res) => {
+  try {
+    const user = await User.find({}).select("-password");
     if (!user) throw Error("User does not exist");
     res.json(user);
   } catch (e) {

@@ -9,6 +9,7 @@ import {
   Container,
   NavLink,
 } from "reactstrap";
+import { Logout } from "./Logout";
 
 const AppNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,7 @@ const AppNav = () => {
   const [name, setName] = useState("");
   useEffect(() => {
     let username: any = localStorage.getItem("user");
-    setName(username);
+    setName(JSON.parse(username).username);
   }, []);
   return (
     <Navbar color="dark" dark expand="sm" className="mb-5">
@@ -35,9 +36,9 @@ const AppNav = () => {
                 <NavLink href="#">Profile</NavLink>
               </NavItem>
               <NavItem>
-                <Fragment>
-                  <NavLink href="#">Logout</NavLink>
-                </Fragment>
+                <NavItem>
+                  <Logout />
+                </NavItem>
               </NavItem>
             </Fragment>
           </Nav>
