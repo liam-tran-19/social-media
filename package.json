@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/son-tran-97/social-media.git",
-    "start": "nodemon server.js"
+    "url": "git+https://github.com/son-tran-97/social-media.git"
   },
   "author": "",
   "license": "ISC",
