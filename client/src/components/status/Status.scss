@@ -1,7 +1,7 @@
 @import "./color.scss";
 
 .feed {
-  // flex: 30%;
+  flex: 0.5;
   border-right: 1px solid $twitter-background;
   min-width: fit-content;
   overflow-y: scroll;

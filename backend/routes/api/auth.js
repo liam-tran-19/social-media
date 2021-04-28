@@ -9,12 +9,6 @@ const User = require("../../models/User");
 const { JWT_SECRET } = config;
 const router = Router();
 
-/**
- * @route   POST api/auth/login
- * @desc    Login user
- * @access  Public
- */
-
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -46,13 +40,6 @@ router.post("/login", async (req, res) => {
     res.status(400).json({ msg: e.message });
   }
 });
-
-/**
- * @route   POST api/users
- * @desc    Register new user
- * @access  Public
- */
-
 router.post("/register", async (req, res) => {
   const { _id, username, email, password } = req.body;
 

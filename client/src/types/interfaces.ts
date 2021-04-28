@@ -1,5 +1,6 @@
 import { E_ERROR } from './enum';
 import {RouteProps} from 'react-router';
+import {FIND_ALL_STATUS_SUCCESS, FIND_ALL_STATUS_FAIL,FIND_ALL_STATUS_LOADING, UPDATE_STATUS_FAIL, UPDATE_STATUS_SUCCESS, UPDATE_STATUS_LOADING} from '../redux/actions/types'
 
 // REACT
 export interface ITarget {
@@ -105,3 +106,48 @@ export interface IChatMsg {
   message: any 
   userId: number;
 }
+
+export interface IComments {
+  idCommenter: number;
+  nameCommenter: string;
+  contentComment: string
+}
+
+export interface IAllPosts{
+  _id: number;
+  idPoster: number;
+  postedDetails: string,
+  idLiker: Array<number>
+  comments: Array<IComments>
+}
+
+export interface IPosts {
+  key: number,
+  post: IAllPosts
+}
+
+export interface StatusSuccess {
+  type: typeof FIND_ALL_STATUS_SUCCESS,
+  payload: IAllPosts[]
+}
+export interface StatusFail {
+  type: typeof FIND_ALL_STATUS_FAIL
+}
+
+export interface StatusLoading {
+  type: typeof FIND_ALL_STATUS_LOADING
+}
+export interface UpdateSuccess {
+  type: typeof UPDATE_STATUS_SUCCESS,
+  payload: IAllPosts
+}
+export interface UpdateFail {
+  type: typeof UPDATE_STATUS_FAIL
+}
+
+export interface UpdateLoading {
+  type: typeof UPDATE_STATUS_LOADING
+}
+
+export type StatusActions = StatusSuccess | StatusFail | StatusLoading
+export type UpdateActions = UpdateLoading | UpdateFail |UpdateSuccess

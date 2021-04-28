@@ -4,12 +4,6 @@ const User = require('../../models/User');
 
 const router = Router();
 
-/**
- * @route   GET api/users
- * @desc    Get all users
- * @access  Private
- */
-
 router.get('/', async (req, res) => {
   try {
     const users = await User.find();

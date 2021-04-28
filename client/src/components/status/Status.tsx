@@ -1,12 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AppNav from "../AppNav";
 import { Avatar, Button } from "@material-ui/core";
 import FlipMove from "react-flip-move";
 import "./Status.scss";
 import Post from "../post/Post";
 import { Container } from "reactstrap";
-
+import profilePic from "../../images/prodile.png";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { RootStore } from "../../redux/store";
+import { IAllPosts } from "../../types/interfaces";
+import { getPosts } from "../../redux/actions/statusActions";
 const Status: React.FC<{}> = () => {
+  const [tweetMessage, setTweetMessage] = useState<string>();
+  // const [allPosts, setAllPosts] = useState<Array<IAllPosts>>();
+
+  const dispatch = useDispatch();
+  const { user } = useSelector((state: RootStore) => state.auth);
+  const { posts } = useSelector((state: RootStore) => state.status);
+  console.log(user);
+
+  useEffect(() => {
+    dispatch(getPosts());
+    // setAllPosts(posts);
+  }, [tweetMessage]);
+
+  const sendTweet = () => {
+    axios.post("/api/status/post", {
+      _id: posts.length + 1,
+      postedDetails: tweetMessage,
+      idPoster: user.id,
+    });
+    setTweetMessage("");
+    console.log("hello");
+  };
+  // console.log(allPosts);
+  console.log(posts);
+
   return (
     <>
       <AppNav />
@@ -17,40 +47,25 @@ const Status: React.FC<{}> = () => {
           </div>
 
           <div className="feed__tweetBox">
-            <form>
-              <div className="feed__tweetBox__input">
-                {/* <Avatar src="https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/themes/284832/settings_images/rLlCifhXRJiT0RoN2FjK_Logo_roundbackground_black.png" /> */}
-                <input
-                  // onChange={(e) => setTweetMessage(e.target.value)}
-                  // value={tweetMessage}
-                  placeholder="Share your status with friends?"
-                  type="text"
-                />
-              </div>
+            <div className="feed__tweetBox__input">
+              <Avatar src={profilePic} />
+              <input
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setTweetMessage(e.target.value)
+                }
+                value={tweetMessage}
+                placeholder="Share your status with friends?"
+                type="text"
+              />
+            </div>
 
-              <Button
-                // onClick={sendTweet}
-                type="submit"
-                className="feed__tweetBox__tweetButton"
-              >
-                Tweet
-              </Button>
-            </form>
+            <Button onClick={sendTweet} className="feed__tweetBox__tweetButton">
+              Tweet
+            </Button>
           </div>
-
-          {/* <FlipMove>
-        {posts.map((post) => (
-          <Post
-            key={post.text}
-            displayName={post.displayName}
-            username={post.username}
-            verified={post.verified}
-            text={post.text}
-            avatar={post.avatar}
-            image={post.image}
-          />
-         ))}
-      </FlipMove> */}
+          <FlipMove>
+            <div>{posts && posts.map((post) => <Post key={post._id} post={post} />)}</div>
+          </FlipMove>
         </div>
       </Container>
     </>
