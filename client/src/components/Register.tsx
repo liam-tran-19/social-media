@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../redux/actions/authActions";
 import { Container } from "reactstrap";
 
-const Register = () => {
+const Register: React.FC<{}> = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

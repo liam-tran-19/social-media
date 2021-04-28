@@ -6,8 +6,8 @@ import firebase from "firebase/app";
 import { useLocation } from "react-router";
 import { IChatMsg, IUserObj } from "../../../types/interfaces";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import axios from 'axios'
-const Conversation = () => {
+import axios from "axios";
+const Conversation: React.FC<{}> = () => {
   let user: any = localStorage.getItem("user");
   let userId = JSON.parse(user).id;
   const [formValue, setFormValue] = useState<string>("");
@@ -17,14 +17,14 @@ const Conversation = () => {
   const dummy = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    axios.get<IUserObj>(`/api/auth/user/id/${userId}`) .then(response => {
+    axios.get<IUserObj>(`/api/auth/user/id/${userId}`).then((response) => {
       console.log(response.data);
-      setUserData( response.data );
-  });
-    axios.get<IUserObj>(`/api/auth/user/id/${state}`) .then(response => {
+      setUserData(response.data);
+    });
+    axios.get<IUserObj>(`/api/auth/user/id/${state}`).then((response) => {
       console.log(response.data);
-      setStateData( response.data );
-  });
+      setStateData(response.data);
+    });
   }, []);
   console.log(userData);
   console.log(stateData);

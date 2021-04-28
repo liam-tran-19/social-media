@@ -8,7 +8,7 @@ import { firestore } from "../../firebase";
 import { Link, useHistory } from "react-router-dom";
 import newMessage from "../../images/Write Message.png";
 import profilePicture from "../../images/prodile.png";
-const Chat = () => {
+const Chat: React.FC<{}> = () => {
   const [searchName, setSearchName] = useState("");
   const [listFriends, setListFriends] = useState<Array<IUserObj>>();
   const [newMsg, setNewMsg] = useState<boolean>(false);

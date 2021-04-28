@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import {
   Collapse,
   Navbar,
@@ -19,10 +20,19 @@ const AppNav = () => {
     let username: any = localStorage.getItem("user");
     setName(JSON.parse(username).username);
   }, []);
+
+  const history = useHistory()
+
+  const goProfile = () => {
+    history.push('/')
+  }
+  const goMessage = () => {
+    history.push('/chat')
+  }
   return (
     <Navbar color="dark" dark expand="sm" className="mb-5">
       <Container>
-        <NavbarBrand>Chat Room</NavbarBrand>
+        <NavbarBrand onClick={goProfile}>Chat Room</NavbarBrand>
         <NavbarToggler onClick={handleToggle} />
         <Collapse navbar isOpen={isOpen}>
           <Nav className="ml-auto" navbar>
@@ -33,7 +43,7 @@ const AppNav = () => {
                 </span>
               </NavItem>
               <NavItem>
-                <NavLink href="#">Profile</NavLink>
+                <NavLink onClick={goMessage}>Message</NavLink>
               </NavItem>
               <NavItem>
                 <NavItem>

@@ -6,7 +6,7 @@ import { login } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStore } from "../redux/store";
 import { Container } from "reactstrap";
-const Login = () => {
+const Login: React.FC<{}> = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
