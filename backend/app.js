@@ -1,4 +1,6 @@
-const express = require('express');
+const feathers = require("@feathersjs/feathers");
+const express = require("@feathersjs/express");
+const socketio = require("@feathersjs/socketio");
 const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
@@ -10,10 +12,14 @@ const config = require('./config');
 const authRoutes = require('./routes/api/auth');
 const userRoutes = require('./routes/api/users');
 const statusRoutes = require('./routes/api/status')
+const ChatModel = require('./models/Chat')
 
 const { MONGO_DB_NAME } = config;
 
-const app = express();
+const app = express(feathers());
+app.use(express.json());
+app.configure(socketio());
+app.configure(express.rest());
 
 // CORS Middleware
 app.use(cors());
@@ -36,6 +42,7 @@ mongoose
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/status', statusRoutes)
+app.use('/api/chat', new ChatModel)
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
@@ -46,5 +53,10 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
+
+// New connections connect to stream channel
+app.on("connection", (conn) => app.channel("stream").join(conn));
+// Publish events to stream
+app.publish((data) => app.channel("stream"));
 
 module.exports = app;

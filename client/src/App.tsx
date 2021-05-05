@@ -20,8 +20,8 @@ function App() {
         <div className="App">
           <Route path="/login" exact component={Login}></Route>
           <Route path="/signup" component={Register}></Route>
-          <PrivateRoute exact path="/chat" component={Chat} />
-          <PrivateRoute exact path="/" component={Status} />
+          <PrivateRoute exact path="/social-media" component={Status} />
+          <PrivateRoute exact path="/" component={Chat} />
           <PrivateRoute exact path="/conversation" component={Conversation} />
         </div>
       </Switch>

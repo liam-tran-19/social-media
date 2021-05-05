@@ -27,7 +27,7 @@ const AppNav = () => {
     history.push('/')
   }
   const goMessage = () => {
-    history.push('/chat')
+    history.push('/social-media')
   }
   return (
     <Navbar color="dark" dark expand="sm" className="mb-5">
